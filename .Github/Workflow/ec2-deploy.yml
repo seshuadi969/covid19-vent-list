@@ -2,7 +2,7 @@ name: Build & Deploy to EC2
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]
   workflow_dispatch:
 
 jobs:
@@ -24,8 +24,8 @@ jobs:
             echo "==== Pulling latest code ===="
             cd ~/covid19-vent-list || git clone https://github.com/${{ github.repository }} ~/covid19-vent-list
             cd ~/covid19-vent-list
-            git fetch origin main
-            git reset --hard origin/main
+            git fetch origin master
+            git reset --hard origin/master
 
             echo "==== Building backend ===="
             docker build -t covid-backend:latest -f backend/Dockerfile ./backend
