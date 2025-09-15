@@ -1,0 +1,16 @@
+# Adjust if your backend entrypoint/port is different
+FROM python:3.10-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+WORKDIR /app
+COPY backend/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY backend/ .
+
+EXPOSE 5000
+# Change app:app if your WSGI entrypoint is different
+CMD ["gunicorn", "app:app", "--bind", "0.0.0.0:5000", "--workers", "3"]
+
